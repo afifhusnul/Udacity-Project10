@@ -321,7 +321,9 @@ public class ProductActivity extends AppCompatActivity implements LoaderManager.
         txtProductQuantity.setText("");
     }
 
-
+    /*
+    * Validate input and if error return to input/edit page
+    */
     public boolean validateInputs(EditText productEditText, EditText descriptionEditText, EditText supplierEditText,
                                   EditText emailEditText, EditText priceEditText, EditText quantityEditText, Uri uri) {
         if (uri == null) return false;
