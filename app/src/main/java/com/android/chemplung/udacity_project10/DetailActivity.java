@@ -21,6 +21,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,11 +39,13 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
     TextView productDescText;
     TextView supplierNameText;
     TextView productQtyText;
+    ImageView productImageView;
 
     String productName;
     String productDesc;
     String supplierName;
     String supplierEmail;
+    Uri productImageUri;
     double productPrice;
     int productQuantity;
 
@@ -65,6 +68,7 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
         productDescText = (TextView) findViewById(R.id.detail_description);
         supplierNameText = (TextView) findViewById(R.id.detail_supplier_name);
         productQtyText = (TextView) findViewById(R.id.detail_quantity);
+        productImageView = (ImageView) findViewById(R.id.detail_image);
 
         // set listeners for the button to place an order with the supplier
         Button btnOrder = (Button) findViewById(R.id.btn_detail_order);
@@ -242,6 +246,7 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
                     InventoryEntry.COLUMN_DESCRIPTION,
                     InventoryEntry.COLUMN_SUPPLIER_NAME,
                     InventoryEntry.COLUMN_SUPPLIER_EMAIL,
+                    InventoryEntry.COLUMN_IMAGE_URI,
                     InventoryEntry.COLUMN_PRICE,
                     InventoryEntry.COLUMN_QUANTITY};
 
@@ -259,6 +264,8 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
             productDesc = data.getString(data.getColumnIndex(InventoryEntry.COLUMN_DESCRIPTION));
             supplierName = data.getString(data.getColumnIndex(InventoryEntry.COLUMN_SUPPLIER_NAME));
             supplierEmail = data.getString(data.getColumnIndex(InventoryEntry.COLUMN_SUPPLIER_EMAIL));
+            String productImageUriStr = data.getString(data.getColumnIndex(InventoryEntry.COLUMN_IMAGE_URI));
+            productImageUri = Uri.parse(productImageUriStr);
             productPrice = data.getDouble(data.getColumnIndex(InventoryEntry.COLUMN_PRICE));
             productQuantity = data.getInt(data.getColumnIndex(InventoryEntry.COLUMN_QUANTITY));
             String qtyString = String.valueOf(productQuantity);
@@ -267,6 +274,7 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
             productNameText.setText(productName);
             productDescText.setText(productDesc);
             supplierNameText.setText(supplierName);
+            productImageView.setImageURI(productImageUri);
             productQtyText.setText(qtyString);
         }
     }
@@ -277,6 +285,7 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
         productNameText.setText("");
         productDescText.setText("");
         supplierNameText.setText("");
+        productImageView.setImageURI(null);
         productQtyText.setText("");
     }
 }

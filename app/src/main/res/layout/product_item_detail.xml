@@ -36,8 +36,8 @@
                 android:id="@+id/product_description_text"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:maxLines="4"
                 android:layout_weight="1"
+                android:maxLines="4"
                 tools:text="Product description goes here.\nShow only 4 line \nShow only 4 line \nShow only 4 line \nShow only 4 line" />
 
             <LinearLayout
@@ -52,7 +52,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="right|center_vertical"
-                    android:text="Price" />
+                    tools:text="Price" />
 
                 <TextView
                     android:id="@+id/product_price"
@@ -80,8 +80,8 @@
                 android:layout_gravity="top"
                 android:fontFamily="sans-serif-light"
                 android:gravity="top"
-                android:text="Quantity Available"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                tools:text="Quantity Available" />
 
             <TextView
                 android:id="@+id/product_qty_available"

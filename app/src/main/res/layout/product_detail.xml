@@ -10,6 +10,13 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+        <ImageView
+            android:id="@+id/detail_image"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:scaleType="fitCenter"
+            tools:src="@drawable/pecel" />
+
         <TextView
             android:id="@+id/detail_name_text"
             android:layout_width="match_parent"
@@ -18,7 +25,7 @@
             android:fontFamily="sans-serif"
             android:gravity="center"
             android:textSize="30sp"
-            android:text="Product Name" />
+            tools:text="Product Name" />
 
         <TextView
             android:id="@+id/detail_description"
@@ -29,7 +36,7 @@
             android:layout_marginRight="32dp"
             android:fontFamily="sans-serif"
             android:textSize="14sp"
-            android:text="Product description" />
+            tools:text="Product description" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -50,7 +57,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:fontFamily="sans-serif-light"
-                    android:text="Supplier"
+                    tools:text="Supplier"
                     android:textSize="14sp" />
 
                 <TextView
@@ -60,7 +67,7 @@
                     android:layout_gravity="center_horizontal"
                     android:fontFamily="sans-serif-heavy"
                     android:textSize="20sp"
-                    android:text="Cisco Systems" />
+                    tools:text="Cisco Systems" />
             </LinearLayout>
 
 
@@ -77,7 +84,7 @@
                     android:layout_gravity="right"
                     android:layout_weight="1"
                     android:gravity="right|center_vertical"
-                    android:text="Quantity"
+                    tools:text="Quantity"
                     android:textSize="12sp" />
 
                 <TextView
@@ -87,7 +94,7 @@
                     android:layout_gravity="center_vertical|center_horizontal"
                     android:gravity="center_vertical|center_horizontal"
                     android:textSize="36sp"
-                    android:text="8" />
+                    tools:text="8" />
             </LinearLayout>
         </LinearLayout>
 
@@ -112,7 +119,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical|center_horizontal"
-                android:text="Adjust Volume"
+                tools:text="Adjust Volume"
                 android:textSize="18sp" />
 
             <Button

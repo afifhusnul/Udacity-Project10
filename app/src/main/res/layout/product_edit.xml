@@ -87,6 +87,7 @@
                 <EditText
                     android:id="@+id/editProductPrice"
                     style="@style/textEdit"
+                    android:inputType="numberDecimal"
                     android:hint="@string/edit_product_price_hint" />
             </LinearLayout>
 
@@ -102,7 +103,30 @@
                 <EditText
                     android:id="@+id/editProductQuantity"
                     style="@style/textEdit"
+                    android:inputType="number"
                     android:hint="@string/edit_product_quantity_hint" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/btn_selectImage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="16dp"
+                    android:text="Select Image" />
+
+                <ImageView
+                    android:id="@+id/img_product"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:scaleType="fitCenter"
+                    tools:src="@drawable/pecel" />
             </LinearLayout>
 
         </LinearLayout>

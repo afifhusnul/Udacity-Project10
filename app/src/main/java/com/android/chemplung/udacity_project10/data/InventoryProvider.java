@@ -273,6 +273,7 @@ public class InventoryProvider extends ContentProvider {
             Integer quantity = values.getAsInteger(InventoryEntry.COLUMN_QUANTITY);
             if (quantity == null) {
                 throw new IllegalArgumentException("Product quantity cannot be empty");
+
             }
             if (quantity < 0) {
                 throw new IllegalArgumentException("Product quantity cannot be a negative value");

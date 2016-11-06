@@ -12,6 +12,7 @@ public final class InventoryContract {
     public static final Uri BASE_CONTENT_URI = Uri.parse("content://" + CONTENT_AUTHORITY);
     public static final String PATH_PRODUCTS = "inventory";
 
+    //An empty private constructor makes sure that the class is not going to be initialised.
     private InventoryContract() {    }
 
     /**
@@ -25,6 +26,7 @@ public final class InventoryContract {
         public static final String COLUMN_DESCRIPTION = "description";
         public static final String COLUMN_SUPPLIER_NAME = "supplier_name";
         public static final String COLUMN_SUPPLIER_EMAIL = "supplier_email";
+        public static final String COLUMN_IMAGE_URI = "image_id";
         public static final String COLUMN_PRICE = "price";
         public static final String COLUMN_QUANTITY = "quantity";
 

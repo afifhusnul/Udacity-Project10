@@ -20,23 +20,7 @@ public class InventoryDbHelper extends SQLiteOpenHelper {
      * Inventory Database version
      */
     private static final int DB_VERSION = 1;
-    /**
-     * SQL code to create products table
-     */
-    private static final String SQL_CREATE_PRODUCTS_TABLE = "CREATE TABLE " +
-            InventoryEntry.TABLE_NAME + "(" +
-            InventoryEntry.COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-            InventoryEntry.COLUMN_NAME + " TEXT NOT NULL, " +
-            InventoryEntry.COLUMN_DESCRIPTION + " TEXT, " +
-            InventoryEntry.COLUMN_SUPPLIER_NAME + " TEXT NOT NULL," +
-            InventoryEntry.COLUMN_SUPPLIER_EMAIL + " TEXT NOT NULL, " +
-            InventoryEntry.COLUMN_PRICE + " REAL NOT NULL, " +
-            InventoryEntry.COLUMN_QUANTITY + " INTEGER NOT NULL); ";
-    /**
-     * SQL code to delete products table
-     */
-    private static final String SQL_DELETE_PRODUCTS_TABLE =
-            "DROP TABLE IF EXISTS " + InventoryEntry.TABLE_NAME + ";";
+
     /**
      * Create a new instance of the {@link InventoryDbHelper}
      *
@@ -46,14 +30,28 @@ public class InventoryDbHelper extends SQLiteOpenHelper {
         super(context, DB_NAME, null, DB_VERSION);
     }
 
+    /**
+     * his is called when the database is created for the first time.
+     */
+
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(SQL_CREATE_PRODUCTS_TABLE);
+        String SQL_CREATE_PRODUCT_TABLE = "CREATE TABLE " + InventoryEntry.TABLE_NAME + " ("
+                + InventoryEntry.COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + InventoryEntry.COLUMN_NAME + " TEXT NOT NULL, "
+                + InventoryEntry.COLUMN_DESCRIPTION + " TEXT, "
+                + InventoryEntry.COLUMN_SUPPLIER_NAME + " TEXT NOT NULL, "
+                + InventoryEntry.COLUMN_SUPPLIER_EMAIL + " INTEGER NOT NULL, "
+                + InventoryEntry.COLUMN_IMAGE_URI + " TEXT, "
+                + InventoryEntry.COLUMN_PRICE + " REAL NOT NULL, "
+                + InventoryEntry.COLUMN_QUANTITY + " INTEGER NOT NULL); ";
+        // Execute the SQL statement
+        db.execSQL(SQL_CREATE_PRODUCT_TABLE);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL(SQL_DELETE_PRODUCTS_TABLE);
-        onCreate(db);
+        // The database is still at version 1, so no action is required at this time.
     }
+
 }

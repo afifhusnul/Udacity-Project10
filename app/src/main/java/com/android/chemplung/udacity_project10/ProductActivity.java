@@ -3,7 +3,9 @@ package com.android.chemplung.udacity_project10;
 import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -18,7 +20,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.android.chemplung.udacity_project10.data.InventoryContract.InventoryEntry;
@@ -34,9 +38,14 @@ public class ProductActivity extends AppCompatActivity implements LoaderManager.
     private EditText txtProductDescription;
     private EditText txtSupplierName;
     private EditText txtSupplierEmail;
+    private ImageView productImageView;
     private EditText txtProductPrice;
     private EditText txtProductQuantity;
     private boolean itemChanged = false;
+    Button btnSelectImage;
+    Uri imageUri;
+
+    private static final int GET_IMAGE_ACTIVITY = 1234;
 
 
     @Override
@@ -48,6 +57,8 @@ public class ProductActivity extends AppCompatActivity implements LoaderManager.
         txtProductDescription = (EditText) findViewById(R.id.editProductDescription);
         txtSupplierName = (EditText) findViewById(R.id.editSupplierName);
         txtSupplierEmail = (EditText) findViewById(R.id.editSupplierEmail);
+        productImageView = (ImageView) findViewById(R.id.img_product);
+        btnSelectImage = (Button) findViewById(R.id.btn_selectImage);
         txtProductPrice = (EditText) findViewById(R.id.editProductPrice);
         txtProductQuantity = (EditText) findViewById(R.id.editProductQuantity);
 
@@ -57,7 +68,19 @@ public class ProductActivity extends AppCompatActivity implements LoaderManager.
         txtSupplierEmail.setOnTouchListener(onEntryTouched);
         txtProductPrice.setOnTouchListener(onEntryTouched);
         txtProductQuantity.setOnTouchListener(onEntryTouched);
+        btnSelectImage.setOnTouchListener(onEntryTouched);
 
+
+        btnSelectImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent getImageIntent = new Intent(Intent.ACTION_GET_CONTENT);
+                getImageIntent.setType("image/*");
+                if (getImageIntent.resolveActivity(getPackageManager()) != null) {
+                    startActivityForResult(getImageIntent, GET_IMAGE_ACTIVITY);
+                }
+            }
+        });
 
         uri = getIntent().getData();
         if (uri == null) {
@@ -80,11 +103,14 @@ public class ProductActivity extends AppCompatActivity implements LoaderManager.
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.edit_action_save) {
-            // save the item
-            saveProduct();
-            // exit the activity
-            finish();
-            return true;
+
+            if (validateInputs(txtProductName, txtProductDescription, txtSupplierName, txtSupplierEmail, txtProductPrice,txtProductQuantity,imageUri )) {
+                // save the item
+                saveProduct();
+                // exit the activity
+                finish();
+                return true;
+            }
         }
         if (item.getItemId() == android.R.id.home) {
             if (!itemChanged) {
@@ -105,8 +131,19 @@ public class ProductActivity extends AppCompatActivity implements LoaderManager.
         }
     };
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == GET_IMAGE_ACTIVITY && resultCode == RESULT_OK) {
+            Bitmap bmp = data.getParcelableExtra("data");
+            Uri imageUri = data.getData();
+            productImageView.setImageURI(imageUri);
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
 
     private void saveProduct() {
+
         // Make sure data fillup properly and save accordingly
         if (TextUtils.isEmpty(txtProductName.getText()) &&
                 TextUtils.isEmpty(txtProductDescription.getText()) &&
@@ -118,28 +155,14 @@ public class ProductActivity extends AppCompatActivity implements LoaderManager.
             return;
         }
 
-        String productName = txtProductName.getText().toString();
+        String productName = txtProductName.getText().toString().trim();
         // product name cannot be null
         if (productName.isEmpty()) {
             Toast.makeText(this, "Product Name cannot be empty", Toast.LENGTH_SHORT).show();
             return;
         }
-        String productDescription = txtProductDescription.getText().toString();
-        // product price must be numeric and greater than zero
-        double productPrice = -1;
-        try {
-            String priceString = txtProductPrice.getText().toString().replace("$", "");
-            productPrice = Double.parseDouble(priceString);
-            if (productPrice < 0) {
-//                Toast.makeText(this, "Price can't be negative value", Toast.LENGTH_SHORT).show();
-                return;
-            }
-        } catch (Exception e) {
-            Toast.makeText(this, "Invalid price", Toast.LENGTH_SHORT).show();
-            return;
-        }
 
-        String supplierName = txtSupplierName.getText().toString();
+        String supplierName = txtSupplierName.getText().toString().trim();
         // supplier name cannot be null
         if (supplierName.isEmpty()){
             Toast.makeText(this, "Supplier Name cannot be empty", Toast.LENGTH_SHORT).show();
@@ -152,12 +175,34 @@ public class ProductActivity extends AppCompatActivity implements LoaderManager.
             return;
         }
 
+        // image uri can be null
+        String imageUriString = "";
+        if (imageUri !=null){
+            imageUriString = imageUri.toString();
+        }
+
+                String productDescription = txtProductDescription.getText().toString().trim();
+        // product price must be numeric and greater than zero
+        double productPrice = -1;
+        try {
+            String priceString = txtProductPrice.getText().toString().replace("$", "");
+            productPrice = Double.parseDouble(priceString);
+            if (productPrice < 0) {
+                Toast.makeText(this, "Price should be > 0", Toast.LENGTH_SHORT).show();
+                return;
+            }
+        } catch (Exception e) {
+            Toast.makeText(this, "Invalid price", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         // product quantity must be numeric and greater than zero
         int productQuantity;
         try {
-            String quantityString = txtProductQuantity.getText().toString();
+            String quantityString = txtProductQuantity.getText().toString().trim();
             productQuantity = Integer.parseInt(quantityString);
             if (productQuantity < 0) {
+                Toast.makeText(this, "Quantity should be > 0", Toast.LENGTH_SHORT).show();
                 return;
             }
         } catch (Exception e){
@@ -165,12 +210,12 @@ public class ProductActivity extends AppCompatActivity implements LoaderManager.
             return;
         }
 
-
         ContentValues values = new ContentValues();
         values.put(InventoryEntry.COLUMN_NAME, productName);
         values.put(InventoryEntry.COLUMN_DESCRIPTION, productDescription);
         values.put(InventoryEntry.COLUMN_SUPPLIER_NAME, supplierName);
         values.put(InventoryEntry.COLUMN_SUPPLIER_EMAIL, supplierEmail);
+        values.put(InventoryEntry.COLUMN_IMAGE_URI, imageUriString);
         values.put(InventoryEntry.COLUMN_PRICE, productPrice);
         values.put(InventoryEntry.COLUMN_QUANTITY, productQuantity);
 
@@ -235,6 +280,7 @@ public class ProductActivity extends AppCompatActivity implements LoaderManager.
                     InventoryEntry.COLUMN_DESCRIPTION,
                     InventoryEntry.COLUMN_SUPPLIER_NAME,
                     InventoryEntry.COLUMN_SUPPLIER_EMAIL,
+                    InventoryEntry.COLUMN_IMAGE_URI,
                     InventoryEntry.COLUMN_PRICE,
                     InventoryEntry.COLUMN_QUANTITY};
             return new CursorLoader(this, uri, columns, null, null, null);
@@ -249,6 +295,8 @@ public class ProductActivity extends AppCompatActivity implements LoaderManager.
             String description = data.getString(data.getColumnIndex(InventoryEntry.COLUMN_DESCRIPTION));
             String supplierName = data.getString(data.getColumnIndex(InventoryEntry.COLUMN_SUPPLIER_NAME));
             String supplierEmail = data.getString(data.getColumnIndex(InventoryEntry.COLUMN_SUPPLIER_EMAIL));
+            String imageUriString = data.getString(data.getColumnIndex(InventoryEntry.COLUMN_IMAGE_URI));
+            imageUri = Uri.parse(imageUriString);
             double price = data.getDouble(data.getColumnIndex(InventoryEntry.COLUMN_PRICE));
             int quantity = data.getInt(data.getColumnIndex(InventoryEntry.COLUMN_QUANTITY));
 
@@ -256,7 +304,8 @@ public class ProductActivity extends AppCompatActivity implements LoaderManager.
             txtProductDescription.setText(description);
             txtSupplierName.setText(supplierName);
             txtSupplierEmail.setText(supplierEmail);
-            txtProductPrice.setText(String.format("$ %.2f", price));
+            productImageView.setImageURI(imageUri);
+            txtProductPrice.setText(String.format("%.2f", price));
             txtProductQuantity.setText(String.valueOf(quantity));
         }
     }
@@ -267,7 +316,28 @@ public class ProductActivity extends AppCompatActivity implements LoaderManager.
         txtProductDescription.setText("");
         txtSupplierName.setText("");
         txtSupplierEmail.setText("");
+        productImageView.setImageURI(null);
         txtProductPrice.setText("");
         txtProductQuantity.setText("");
+    }
+
+
+    public boolean validateInputs(EditText productEditText, EditText descriptionEditText, EditText supplierEditText,
+                                  EditText emailEditText, EditText priceEditText, EditText quantityEditText, Uri uri) {
+        if (uri == null) return false;
+        String productName = productEditText.getText().toString().trim();
+        String productDescription = descriptionEditText.getText().toString().trim();
+        String supplierName = supplierEditText.getText().toString().trim();
+        String supplierEmail = emailEditText.getText().toString().trim();
+        String productPrice = priceEditText.getText().toString().trim();
+        String productQty = quantityEditText.getText().toString().trim();
+
+        if (TextUtils.isEmpty(productName)) return false;
+        if (TextUtils.isEmpty(productDescription)) return false;
+        if (TextUtils.isEmpty(supplierName)) return false;
+        if (TextUtils.isEmpty(supplierEmail)) return false;
+        if (TextUtils.isEmpty(productPrice)) return false;
+        if (TextUtils.isEmpty(productQty)) return false;
+        return true;
     }
 }

@@ -115,6 +115,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         values.put(InventoryEntry.COLUMN_DESCRIPTION, getString(R.string.product_description1));
         values.put(InventoryEntry.COLUMN_SUPPLIER_NAME, getString(R.string.product_supplier_name1));
         values.put(InventoryEntry.COLUMN_SUPPLIER_EMAIL, getString(R.string.product_supplier_email1));
+        values.put(InventoryEntry.COLUMN_IMAGE_URI, getDrawableResourceUri(R.drawable.pecel).toString());
         values.put(InventoryEntry.COLUMN_QUANTITY, 100);
         values.put(InventoryEntry.COLUMN_PRICE, 5.99);
         Uri newProductUri = getContentResolver().insert(InventoryEntry.CONTENT_URI, values);
@@ -123,6 +124,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         values.put(InventoryEntry.COLUMN_DESCRIPTION, getString(R.string.product_description2));
         values.put(InventoryEntry.COLUMN_SUPPLIER_NAME, getString(R.string.product_supplier_name2));
         values.put(InventoryEntry.COLUMN_SUPPLIER_EMAIL, getString(R.string.product_supplier_email2));
+        values.put(InventoryEntry.COLUMN_IMAGE_URI, getDrawableResourceUri(R.drawable.gudeg).toString());
         values.put(InventoryEntry.COLUMN_QUANTITY, 88);
         values.put(InventoryEntry.COLUMN_PRICE, 7);
         newProductUri = getContentResolver().insert(InventoryEntry.CONTENT_URI, values);
@@ -131,6 +133,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         values.put(InventoryEntry.COLUMN_DESCRIPTION, getString(R.string.product_description3));
         values.put(InventoryEntry.COLUMN_SUPPLIER_NAME, getString(R.string.product_supplier_name3));
         values.put(InventoryEntry.COLUMN_SUPPLIER_EMAIL, getString(R.string.product_supplier_email3));
+        values.put(InventoryEntry.COLUMN_IMAGE_URI, getDrawableResourceUri(R.drawable.kerabu).toString());
         values.put(InventoryEntry.COLUMN_QUANTITY, 89);
         values.put(InventoryEntry.COLUMN_PRICE, 8.50);
         newProductUri = getContentResolver().insert(InventoryEntry.CONTENT_URI, values);
@@ -146,8 +149,9 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                     InventoryEntry.COLUMN_ID,
                     InventoryEntry.COLUMN_NAME,
                     InventoryEntry.COLUMN_DESCRIPTION,
-                    InventoryEntry.COLUMN_QUANTITY,
-                    InventoryEntry.COLUMN_PRICE};
+                    InventoryEntry.COLUMN_IMAGE_URI,
+                    InventoryEntry.COLUMN_PRICE,
+                    InventoryEntry.COLUMN_QUANTITY};
             return new CursorLoader(this,
                     uri, columns,
                     null, null, null);
