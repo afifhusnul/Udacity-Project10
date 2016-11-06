@@ -1,0 +1,48 @@
+<resources>
+    <string name="app_name">Project10-Inventory</string>
+    <string name="delete">Delete</string>
+    <string name="edit">Edit</string>
+    <string name="save">Save</string>
+    <string name="addone">+1</string>
+    <string name="minusone">-1</string>
+    <string name="adjust_inventory">Adjust Volume</string>
+
+
+    <!-- Main Activity display -->
+    <string name="main_menu_insert_data">Insert Dummy Data</string>
+    <string name="main_menu_delete_all">Delete All Data</string>
+    <string name="empty_text">No data in the DB. Add some to get started</string>
+
+
+    <!-- Editor activity display -->
+    <string name="edit_product_name_label">Product Name</string>
+    <string name="edit_product_name_hint">Enter product name</string>
+    <string name="edit_product_description_label">Product Description</string>
+    <string name="edit_product_description_hint">Enter product description</string>
+    <string name="edit_supplier_name_label">Supplier Name</string>
+    <string name="edit_supplier_name_hint">Enter supplier name</string>
+    <string name="edit_supplier_email_label">Supplier Email Address</string>
+    <string name="edit_supplier_email_hint">Enter supplier email address</string>
+    <string name="edit_product_price_label">Product Price</string>
+    <string name="edit_product_price_hint">Enter product price</string>
+    <string name="edit_product_quantity_label">Product Quantity</string>
+    <string name="edit_product_quantity_hint">Enter current product quantity</string>
+
+
+    <!-- Dummy Data -->
+    <string name="product_name1">Pecel</string>
+    <string name="product_name2">Gudeg</string>
+    <string name="product_name3">Kerabu</string>
+    <string name="product_description1">Nasi Pecel is a Javanese rice dish served with pecel (cooked vegetables and peanut sauce).[1] The vegetables are usually kangkung or water spinach, long beans, cassava leaves, papaya leaves, and in East Java often used kembang turi. It tastes best when eaten with fried tempeh and traditional cracker called peyek. It is popular in East and Central Java.</string>
+    <string name="product_description2">Nasi Gudeg is a traditional Javanese cuisine from Yogyakarta and Central Java, Indonesia. Gudeg is made from young unripe jack fruit (Javanese: gori, Indonesian: nangka muda) boiled for several hours with palm sugar, and coconut milk.[3][4] Additional spices include garlic, shallot, candlenut, coriander seed, galangal, bay leaves, and teak leaves, the latter giving a reddish brown color to the dish.[5] It is often described as "green jack fruit sweet stew".</string>
+    <string name="product_description3">Nasi Kerabu is a Malay rice dish, a type of nasi ulam, in which blue-coloured rice is eaten with dried fish or fried chicken, crackers, pickles and other salads. The blue color of rice resulting from the petals of Clitoria ternatea (butterfly-pea) flowers (kembang telang) used in cooking it.[1] The rice can also be cooked with plain white rice or rice cooked using turmeric. It is often eaten with solok lada and is also eaten with fried keropok</string>
+    <string name="product_supplier_name1">Nasi Pecel Corp LTD.</string>
+    <string name="product_supplier_name2">Nasi Gudeg Corp LTD.</string>
+    <string name="product_supplier_name3">Nasi Kerabu Corp LTD.</string>
+    <string name="product_supplier_email1">nasi@pecel.com</string>
+    <string name="product_supplier_email2">nasi@gudeg.com</string>
+    <string name="product_supplier_email3">nasi@kerabu.com</string>
+
+
+
+</resources>

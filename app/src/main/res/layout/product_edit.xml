@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/textLabel"
+                    android:text="@string/edit_product_name_label" />
+
+                <EditText
+                    android:id="@+id/editProductName"
+                    style="@style/textEdit"
+                    android:hint="@string/edit_product_name_hint" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/textLabel"
+                    android:text="@string/edit_product_description_label" />
+
+                <EditText
+                    android:id="@+id/editProductDescription"
+                    style="@style/textEdit"
+                    android:hint="@string/edit_product_description_hint"
+                    android:inputType="textMultiLine" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/textLabel"
+                    android:text="@string/edit_supplier_name_label" />
+
+                <EditText
+                    android:id="@+id/editSupplierName"
+                    style="@style/textEdit"
+                    android:hint="@string/edit_supplier_name_hint" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/textLabel"
+                    android:text="@string/edit_supplier_email_label" />
+
+                <EditText
+                    android:id="@+id/editSupplierEmail"
+                    style="@style/textEdit"
+                    android:hint="@string/edit_supplier_email_hint" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/textLabel"
+                    android:text="@string/edit_product_price_label" />
+
+                <EditText
+                    android:id="@+id/editProductPrice"
+                    style="@style/textEdit"
+                    android:hint="@string/edit_product_price_hint" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/textLabel"
+                    android:text="@string/edit_product_quantity_label" />
+
+                <EditText
+                    android:id="@+id/editProductQuantity"
+                    style="@style/textEdit"
+                    android:hint="@string/edit_product_quantity_hint" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </RelativeLayout>
+</ScrollView>
