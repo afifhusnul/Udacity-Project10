@@ -125,7 +125,7 @@
                     android:id="@+id/img_product"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/add_drawable_image"
+                    android:background="@drawable/add_draw_image"
                     android:scaleType="fitCenter"
                     app:srcCompat="@drawable/ic_add_image" />
             </LinearLayout>
