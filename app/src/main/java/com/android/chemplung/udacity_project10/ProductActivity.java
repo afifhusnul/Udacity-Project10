@@ -26,6 +26,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.android.chemplung.udacity_project10.data.InventoryContract.InventoryEntry;
+
 /**
  * Created by NUSNAFIF on 11/5/2016.
  */
@@ -103,14 +104,11 @@ public class ProductActivity extends AppCompatActivity implements LoaderManager.
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.edit_action_save) {
-
-            if (validateInputs(txtProductName, txtProductDescription, txtSupplierName, txtSupplierEmail, txtProductPrice,txtProductQuantity,imageUri )) {
                 // save the item
                 saveProduct();
                 // exit the activity
                 finish();
                 return true;
-            }
         }
         if (item.getItemId() == android.R.id.home) {
             if (!itemChanged) {
@@ -181,7 +179,7 @@ public class ProductActivity extends AppCompatActivity implements LoaderManager.
             imageUriString = imageUri.toString();
         }
 
-                String productDescription = txtProductDescription.getText().toString().trim();
+        String productDescription = txtProductDescription.getText().toString().trim();
         // product price must be numeric and greater than zero
         double productPrice = -1;
         try {
@@ -319,27 +317,5 @@ public class ProductActivity extends AppCompatActivity implements LoaderManager.
         productImageView.setImageURI(null);
         txtProductPrice.setText("");
         txtProductQuantity.setText("");
-    }
-
-    /*
-    * Validate input and if error return to input/edit page
-    */
-    public boolean validateInputs(EditText productEditText, EditText descriptionEditText, EditText supplierEditText,
-                                  EditText emailEditText, EditText priceEditText, EditText quantityEditText, Uri uri) {
-        if (uri == null) return false;
-        String productName = productEditText.getText().toString().trim();
-        String productDescription = descriptionEditText.getText().toString().trim();
-        String supplierName = supplierEditText.getText().toString().trim();
-        String supplierEmail = emailEditText.getText().toString().trim();
-        String productPrice = priceEditText.getText().toString().trim();
-        String productQty = quantityEditText.getText().toString().trim();
-
-        if (TextUtils.isEmpty(productName)) return false;
-        if (TextUtils.isEmpty(productDescription)) return false;
-        if (TextUtils.isEmpty(supplierName)) return false;
-        if (TextUtils.isEmpty(supplierEmail)) return false;
-        if (TextUtils.isEmpty(productPrice)) return false;
-        if (TextUtils.isEmpty(productQty)) return false;
-        return true;
     }
 }
