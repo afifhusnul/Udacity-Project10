@@ -104,11 +104,11 @@ public class ProductActivity extends AppCompatActivity implements LoaderManager.
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.edit_action_save) {
-                // save the item
-                saveProduct();
-                // exit the activity
-                finish();
-                return true;
+            // save the item
+            saveProduct();
+            // exit the activity
+            finish();
+            return true;
         }
         if (item.getItemId() == android.R.id.home) {
             if (!itemChanged) {
